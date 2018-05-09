@@ -38,9 +38,9 @@ var makeChange = function(total) {
   let combos = (currentInputValue, coins) => {
 
     if (currentInputValue === 0) {
-      coins.sort();
-      if (!coinsUsed[JSON.stringify(coins)]) {
-        coinsUsed[JSON.stringify(coins)] = true;
+      coins = JSON.stringify(coins.sort());
+      if (!coinsUsed[coins]) {
+        coinsUsed[coins] = true;
         return;
       } else {
         return;
@@ -50,8 +50,7 @@ var makeChange = function(total) {
     }
 
     for (var i = pieces.length - 1; i > -1; i--) {
-      coins = coins.concat([pieces(i)]);
-      combos(currentInputValue - pieces[i]);
+      combos(currentInputValue - pieces[i], coins.concat([pieces(i)]));
     }
   };
 
