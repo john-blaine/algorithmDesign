@@ -1,3 +1,6 @@
+const should = require('should');
+const Tree = require('./commonAncestor.js');
+
 describe('Tree', function() {
   it('should exist', function() {
 
@@ -86,7 +89,7 @@ describe('Tree', function() {
       var right;
       var expectedAncestor;
       var commonAncestor;
-      
+
       // just a complicated tree to test against.
       var root = new Tree();
       for (var i = 0; i < 4; i++) {

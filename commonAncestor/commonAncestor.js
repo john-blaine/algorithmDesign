@@ -38,9 +38,17 @@ Tree.prototype.addChild = function(child) {
   *  3.) between my grandma and my grandma -> my grandma
   *  4.) between me and a potato -> null
   */
-Tree.prototype.getClosestCommonAncestor = function(/*...*/
-) {
-  // TODO: implement me!
+Tree.prototype.getClosestCommonAncestor = function(child1, child2, ancestor) {
+
+  for (var i = 0; i < this.children.length; i++) {
+    if (this.children[i].isDescendant(child1) && this.children[i].isDescendant(child2)) {
+      ancestor = this.children[i];
+      this.children[i].getClosestCommonAncestor(child1, child2, ancestor)
+    }
+  }
+
+  return ancestor;
+
 };
 
 /**
@@ -56,7 +64,7 @@ Tree.prototype.getAncestorPath = function(child, path) {
     if (this.isDescendant(child)) {
       path = [this];
     } else {
-      path = [];
+      path = null;
     }
   }
 
@@ -101,3 +109,5 @@ Tree.prototype.removeChild = function(child) {
     throw new Error('That node is not an immediate child of this tree');
   }
 };
+
+module.exports = Tree;
