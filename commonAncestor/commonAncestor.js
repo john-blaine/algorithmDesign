@@ -43,7 +43,7 @@ Tree.prototype.getClosestCommonAncestor = function(child1, child2, ancestor) {
   for (var i = 0; i < this.children.length; i++) {
     if (this.children[i].isDescendant(child1) && this.children[i].isDescendant(child2)) {
       ancestor = this.children[i];
-      this.children[i].getClosestCommonAncestor(child1, child2, ancestor)
+      this.children[i].getClosestCommonAncestor(child1, child2, ancestor);
     }
   }
 
