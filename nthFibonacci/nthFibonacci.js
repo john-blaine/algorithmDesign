@@ -21,9 +21,20 @@
  *
  */
 
-var nthFibonacci = function (n) {
-  // TODO: implement me!
+var nthFibonacci = function(n){
+
+  if (n === 0 || n === 1) {
+    return n;
+  }
+
+  var fibs = [0, 1];
+
+  for (var i = 0; i < n - 1; i++) {
+    fibs.push(fibs.shift() + fibs[0]);
+  }
+
+  return fibs.pop();
 };
 
-
+module.exports = nthFibonacci;
 
