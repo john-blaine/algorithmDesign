@@ -21,20 +21,38 @@
  *
  */
 
-var nthFibonacci = function(n){
+// Solution using lodash module
 
-  if (n === 0 || n === 1) {
-    return n;
+// const _ = require('lodash');
+
+// var nthFibonacci = _.memoize(function(n){
+//   return n < 2 ? n: nthFibonacci(n-1) + nthFibonacci(n-2);
+// });
+
+// Solution using only JS
+
+var nthFibonacci = (function() {
+  var memo = {};
+
+  function f(n) {
+    var value;
+
+    if (n in memo) {
+      value = memo[n];
+    } else {
+      if (n === 0 || n === 1)
+        value = n;
+      else
+        value = f(n - 1) + f(n - 2);
+
+      memo[n] = value;
+    }
+
+    return value;
   }
 
-  var fibs = [0, 1];
-
-  for (var i = 0; i < n - 1; i++) {
-    fibs.push(fibs.shift() + fibs[0]);
-  }
-
-  return fibs.pop();
-};
+  return f;
+})();
 
 module.exports = nthFibonacci;
 
