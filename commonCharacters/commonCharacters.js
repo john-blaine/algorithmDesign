@@ -22,6 +22,10 @@ var commonCharacters = function(string1, string2) {
   }
 
   if (arguments.length === 1) {
+    string1 = string1
+      .split('')
+      .sort()
+      .join('');
     return string1;
   }
 
@@ -38,8 +42,11 @@ var commonCharacters = function(string1, string2) {
         }
       }
     } else {
-      for (var k = 0; k < arguments[i].length; k++) {
-
+      for (var k = 0; k < result.length; k++) {
+        let testChar = result[k];
+        if (!arguments[i].includes(result[k])) {
+          result.splice(k, 1);
+        }
       }
     }
 
