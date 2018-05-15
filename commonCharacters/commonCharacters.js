@@ -11,33 +11,29 @@
  * Extra credit: Extend your function to handle more than two input strings.
  */
 
-
-
 var commonCharacters = function(string1, string2) {
 
-  let result = null;
+  let result = '';
 
   if (arguments.length === 0) {
     return result;
   }
 
   if (arguments.length === 1) {
-    string1 = string1
-      .split('')
-      .sort()
-      .join('');
     return string1;
   }
 
   for (var i = 1; i < arguments.length; i++) {
 
     if (i === 1) {
-      for (var j = 0; j < arguments[i].length; j++) {
-        if (string1.includes(string2[j])) {
+      for (var j = 0; j < string1.length; j++) {
+        if (string2.includes(string1[j])) {
           if (!result) {
-            result = string2[j];
+            result = string1[j];
           } else {
-            result += string2[j];
+            if (!result.includes(string1[j])) {
+              result += string1[j];
+            }
           }
         }
       }
@@ -45,16 +41,17 @@ var commonCharacters = function(string1, string2) {
       for (var k = 0; k < result.length; k++) {
         let testChar = result[k];
         if (!arguments[i].includes(result[k])) {
+          result = result.split('');
           result.splice(k, 1);
+          result = result.join('');
+          k--;
         }
       }
     }
 
   }
 
-  if (result) {
-    result.sort();
-  }
-
-  return null;
+  return result;
 };
+
+module.exports = commonCharacters;
