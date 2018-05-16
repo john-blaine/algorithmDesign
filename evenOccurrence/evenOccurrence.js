@@ -13,6 +13,29 @@
 
 
 var evenOccurrence = function(arr) {
+  let occData = {};
+  let result = null;
+
+  for (var i = 0; i < arr.length; i++) {
+    if (!occData[arr[i]]) {
+      occData[arr[i]] = [false, i];
+    } else {
+      occData[arr[i]][0] = !occData[arr[i]][0];
+    }
+  }
+
+  let occKeys = Object.keys(occData);
+
+  for (var j = 0; j < occKeys.length; j++) {
+    let occKey = occData[occKeys[j]];
+    if (occKey[0]) {
+      if (!result || (result[1] > occKey[1])) {
+        result = [occKeys[j], occKey[1]];
+      }
+    }
+  }
+
+  return result ? result[0] : result;
 
 };
 
