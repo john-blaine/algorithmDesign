@@ -35,6 +35,10 @@ var evenOccurrence = function(arr) {
     }
   }
 
+  if (result && !isNaN(Number(result[0]))) {
+    result[0] = Number(result[0]);
+  }
+
   return result ? result[0] : result;
 
 };
