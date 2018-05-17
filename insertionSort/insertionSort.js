@@ -53,14 +53,38 @@ var swap = (currentIndex, newIndex, arr) => {
   return arr;
 };
 
-var insertionSort = function(array
-) {
+// My initial algorithm
 
-  for (var i = 0; i < array.length; i++) {
-    for (var j = i + 1; j < array.length; j++) {
-      if (array[i].value > array[j].value) {
-        array = swap(i, j, array);
+// var insertionSort = function(array) {
+
+//   for (var i = 0; i < array.length; i++) {
+//     for (var j = i + 1; j < array.length; j++) {
+//       if (array[i].value > array[j].value) {
+//         array = swap(i, j, array);
+//       }
+//     }
+//   }
+
+//   return array;
+// };
+
+var insertionSort = function(array) {
+  let maxEl = null;
+  let maxIndex;
+  let changed = false;
+
+  for (var i = array.length - 1; i > -1; i--) {
+    for (var j = array.length - 1; j > -1; j--) {
+      if (array[j].value > maxEl) {
+        maxEl = array[j];
+        maxIndex = j;
+        changed = true;
       }
+    }
+    if (changed) {
+      array.splice(maxIndex, 1);
+      array.splice(i, maxEl);
+      changed = false;
     }
   }
 
