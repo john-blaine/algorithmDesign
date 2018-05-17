@@ -46,9 +46,24 @@ var testingTransform = function(array) {
   return transform;
 };
 
+var swap = (currentIndex, newIndex, arr) => {
+  let temp = arr[newIndex];
+  arr[newIndex] = arr[currentIndex];
+  arr[currentIndex] = temp;
+  return arr;
+};
+
 var insertionSort = function(array
 ) {
-  // Your code goes here. Feel free to add helper functions if needed.
+
+  for (var i = 0; i < array.length; i++) {
+    for (var j = i + 1; j < array.length; j++) {
+      if (array[i].value > array[j].value) {
+        array = swap(i, j, array);
+      }
+    }
+  }
+
   return array;
 };
 
