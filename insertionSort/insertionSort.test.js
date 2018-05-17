@@ -50,15 +50,39 @@ describe('insertionSort', function() {
   });
 
   it('should handle presorted arrays', function() {
+    var array = testingTransform([1, 2, 21, 43, 100]);
+    insertionSort(array);
+    array.should.eql([
+      {value: 1, i: 0},
+      {value: 2, i: 1},
+      {value: 21, i: 2},
+      {value: 43, i: 3},
+      {value: 100, i: 4}
+    ]);
 
   });
 
   it('should handle negative numbers', function() {
-
+    var array = testingTransform([2, -3, 4, 5]);
+    insertionSort(array);
+    array.should.eql([
+      {value: -3, i: 1},
+      {value: 2, i: 0},
+      {value: 4, i: 2},
+      {value: 5, i: 3}
+    ]);
   });
 
   it('should be a stable sort', function() {
-
+    var array = testingTransform([8, 8, 7, 5, 5]);
+    insertionSort(array);
+    array.should.eql([
+      {value: 5, i: 3},
+      {value: 5, i: 4},
+      {value: 7, i: 2},
+      {value: 8, i: 0},
+      {value: 8, i: 1},
+    ]);
   });
 });
 
