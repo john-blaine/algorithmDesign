@@ -51,3 +51,8 @@ var insertionSort = function(array
   // Your code goes here. Feel free to add helper functions if needed.
   return array;
 };
+
+module.exports = {
+  'testingTransform': testingTransform,
+  'insertionSort': insertionSort
+};

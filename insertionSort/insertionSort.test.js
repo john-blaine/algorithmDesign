@@ -1,17 +1,28 @@
-describe('insetionSort', function() {
+/*jshint esversion: 6 */
+
+const should = require('should');
+const testingTransform = require('./insertionSort.js').testingTransform;
+const insertionSort = require('./insertionSort.js').insertionSort;
+
+describe('insertionSort', function() {
 
   it('should be a function', function() {
-
+    testingTransform.should.be.a.Function();
+    insertionSort.should.be.a.Function();
   });
 
   it('should return an array', function() {
-
+    let result = testingTransform([1, 2, 3, 4]);
+    insertionSort(result).should.be.an.Array();
   });
 
   it('should return the original array', function() {
-
     // This means that the array is sorted in-place;
     // no copies are made, and the original, modified array is returned.
+    let result = testingTransform([1, 2, 3, 4]);
+    let returnedResult = insertionSort(result);
+
+    result.should.equal(returnedResult);
 
   });
 
