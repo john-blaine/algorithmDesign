@@ -28,7 +28,23 @@ var makeHashTable = function() {
   var size = 0;
 
   result.resizeTable = function(sizeUp) {
-
+    if (sizeUp) {
+      storageLimit = storageLimit * 2;
+      for (var i = 0; i < storage.length; i++) {
+        for (var j = 0; j < storage[i].length; j++) {
+          let temp = storage[i][j];
+          this.insert(temp[0], temp[1]);
+        }
+      }
+    } else {
+      storageLimit = storageLimit / 2;
+      for (var i = 0; i < storage.length; i++) {
+        for (var j = 0; j < storage[i].length; j++) {
+          let temp = storage[i][j];
+          this.insert(temp[0], temp[1]);
+        }
+      }
+    }
   };
 
   result.insert = function(key, value) {
