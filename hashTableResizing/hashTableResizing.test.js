@@ -1,3 +1,5 @@
+/*jshint esversion: 6 */
+
 const should = require('should');
 const makeHashTable = require('./hashTableResizing.js');
 
@@ -6,12 +8,12 @@ describe('makeHashTable', function() {
     should.exist(makeHashTable);
   });
   it('should be a function', function() {
-    makeHashTable.should.be.a.Function;
+    makeHashTable.should.be.a.Function();
   });
   it('should return a hash table', function() {
     var hashTable = makeHashTable();
     should.exist(hashTable);
-    hashTable.should.be.an.Object;
+    hashTable.should.be.an.Object();
   });
   it('should return different instances of hash tables each time', function() {
     var hashTable1 = makeHashTable();
@@ -88,7 +90,7 @@ describe('hashTable', function() {
     });
     it('should be a function', function() {
       var hashTable = makeHashTable();
-      hashTable.retrieve.should.be.a.Function;
+      hashTable.retrieve.should.be.a.Function();
     });
     it('should take exactly one argument', function() {
       var hashTable = makeHashTable();
@@ -126,7 +128,7 @@ describe('hashTable', function() {
     });
     it('should be a function', function() {
       var hashTable = makeHashTable();
-      hashTable.remove.should.be.a.Function;
+      hashTable.remove.should.be.a.Function();
     });
     it('should take exactly one argument', function() {
       var hashTable = makeHashTable();

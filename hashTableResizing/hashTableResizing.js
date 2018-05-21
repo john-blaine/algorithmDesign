@@ -31,17 +31,21 @@ var makeHashTable = function() {
     if (sizeUp) {
       storageLimit = storageLimit * 2;
       for (var i = 0; i < storage.length; i++) {
-        for (var j = 0; j < storage[i].length; j++) {
-          let temp = storage[i][j];
-          this.insert(temp[0], temp[1]);
+        if (storage[i]) {
+          for (var j = 0; j < storage[i].length; j++) {
+            let temp = storage[i][j];
+            this.insert(temp[0], temp[1]);
+          }
         }
       }
     } else {
       storageLimit = storageLimit / 2;
       for (var i = 0; i < storage.length; i++) {
-        for (var j = 0; j < storage[i].length; j++) {
-          let temp = storage[i][j];
-          this.insert(temp[0], temp[1]);
+        if (storage[i]) {
+          for (var j = 0; j < storage[i].length; j++) {
+            let temp = storage[i][j];
+            this.insert(temp[0], temp[1]);
+          }
         }
       }
     }
@@ -59,15 +63,15 @@ var makeHashTable = function() {
     let index = getIndexBelowMaxForKey(key, storageLimit);
 
 
-    if (!Array.isarray(storage[index])) {
+    if (!Array.isArray(storage[index])) {
       storage[index] = [];
       storage[index].push([key, value]);
       size++;
     } else {
       let hasKey = false;
       for (var i = 0; i < storage[index].length; i++) {
-        if (storage[index][0] === key) {
-          storage[index][1] = value;
+        if (storage[index][i][0] === key) {
+          storage[index][i][1] = value;
         }
       }
 
@@ -78,33 +82,51 @@ var makeHashTable = function() {
     }
 
 
-    if (storage / size > 0.75) {
+    if ((size / storage.length) > 0.75) {
       this.resizeTable(true);
     }
   };
 
   result.retrieve = function(key) {
     let index = getIndexBelowMaxForKey(key, storageLimit);
+
+    if (!storage[index]) {
+      return undefined;
+    }
+
     for (var i = 0; i < storage[index].length; i++) {
       if (storage[index][i][0] === key) {
         return storage[index][i][1];
       }
     }
 
-    return null;
+    return undefined;
   };
 
   result.remove = function(key) {
-    let index = getIndexBelowMaxForKey(key);
-    for (var i = 0; i < storage[index].length; i++) {
-      if (storage[index][i][0] === key) {
-        let value = storage[index][i][1];
-        storage[index].splice(i, 1);
-        return value;
+    let index = getIndexBelowMaxForKey(key, storageLimit);
+
+    if (!storage[index]) {
+      return undefined;
+    } else {
+      for (var i = 0; i < storage[index].length; i++) {
+        if (storage[index][i][0] === key) {
+          let value = storage[index][i][1];
+          storage[index].splice(i, 1);
+          size--;
+          if (storage[index].length === 0) {
+            storage[index] = undefined;
+          }
+          if ((size / storage.length) < 0.25) {
+            this.resizeTable(false);
+          }
+
+          return value;
+        }
       }
     }
 
-    return null;
+    return undefined;
   };
 
   return result;
