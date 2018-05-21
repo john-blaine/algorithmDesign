@@ -28,22 +28,25 @@ var makeHashTable = function() {
   var size = 0;
 
   result.resizeTable = function(sizeUp) {
+    let oldStorage = storage;
+    storage = [];
+
     if (sizeUp) {
       storageLimit = storageLimit * 2;
-      for (var i = 0; i < storage.length; i++) {
-        if (storage[i]) {
-          for (var j = 0; j < storage[i].length; j++) {
-            let temp = storage[i][j];
-            this.insert(temp[0], temp[1]);
+      for (var i = 0; i < oldStorage.length; i++) {
+        if (oldStorage[i]) {
+          for (var j = 0; j < oldStorage[i].length; j++) {
+            let temp = oldStorage[i][j];
+            this.insert(temp[0], temp[1], true);
           }
         }
       }
     } else {
       storageLimit = storageLimit / 2;
-      for (var i = 0; i < storage.length; i++) {
-        if (storage[i]) {
-          for (var j = 0; j < storage[i].length; j++) {
-            let temp = storage[i][j];
+      for (var i = 0; i < oldStorage.length; i++) {
+        if (oldStorage[i]) {
+          for (var j = 0; j < oldStorage[i].length; j++) {
+            let temp = oldStorage[i][j];
             this.insert(temp[0], temp[1]);
           }
         }
@@ -51,7 +54,7 @@ var makeHashTable = function() {
     }
   };
 
-  result.insert = function(key, value) {
+  result.insert = function(key, value, noResize) {
     if (typeof key !== 'string') {
       return null;
     }
@@ -81,9 +84,10 @@ var makeHashTable = function() {
       }
     }
 
-
-    if ((size / storage.length) > 0.75) {
-      this.resizeTable(true);
+    if (!noResize) {
+      if ((size / storage.length) > 0.75) {
+        this.resizeTable(true);
+      }
     }
   };
 
