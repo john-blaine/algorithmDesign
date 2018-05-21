@@ -84,7 +84,14 @@ var makeHashTable = function() {
   };
 
   result.retrieve = function(key) {
+    let index = getIndexBelowMaxForKey(key, storageLimit);
+    for (var i = 0; i < storage[index].length; i++) {
+      if (storage[index][i][0] === key) {
+        return storage[index][i][1];
+      }
+    }
 
+    return null;
   };
 
   result.remove = function(key) {
