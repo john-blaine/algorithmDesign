@@ -32,7 +32,39 @@ var makeHashTable = function() {
   };
 
   result.insert = function(key, value) {
+    if (typeof key !== 'string') {
+      return null;
+    }
 
+    if (typeof value === 'undefined') {
+      value = null;
+    }
+
+    let index = getIndexBelowMaxForKey(key, storageLimit);
+
+
+    if (!Array.isarray(storage[index])) {
+      storage[index] = [];
+      storage[index].push([key, value]);
+      size++;
+    } else {
+      let hasKey = false;
+      for (var i = 0; i < storage[index].length; i++) {
+        if (storage[index][0] === key) {
+          storage[index][1] = value;
+        }
+      }
+
+      if (!hasKey) {
+        storage[index].push([key, value]);
+        size++;
+      }
+    }
+
+
+    if (storage / size > 0.75) {
+      this.resizeTable(true);
+    }
   };
 
   result.retrieve = function(key) {
