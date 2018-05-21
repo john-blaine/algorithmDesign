@@ -37,7 +37,7 @@ var makeHashTable = function() {
         if (oldStorage[i]) {
           for (var j = 0; j < oldStorage[i].length; j++) {
             let temp = oldStorage[i][j];
-            this.insert(temp[0], temp[1], true);
+            this.insert(temp[0], temp[1]);
           }
         }
       }
@@ -54,7 +54,7 @@ var makeHashTable = function() {
     }
   };
 
-  result.insert = function(key, value, noResize) {
+  result.insert = function(key, value) {
     if (typeof key !== 'string') {
       return null;
     }
@@ -84,10 +84,8 @@ var makeHashTable = function() {
       }
     }
 
-    if (!noResize) {
-      if ((size / storage.length) > 0.75) {
-        this.resizeTable(true);
-      }
+    if ((size / storageLimit) > 0.75) {
+      this.resizeTable(true);
     }
   };
 
@@ -121,7 +119,7 @@ var makeHashTable = function() {
           if (storage[index].length === 0) {
             storage[index] = undefined;
           }
-          if ((size / storage.length) < 0.25) {
+          if ((size / storageLimit) < 0.25) {
             this.resizeTable(false);
           }
 
