@@ -88,7 +88,19 @@ var makeHashTable = function() {
   };
 
   result.remove = function(key) {
+    let index = getIndexBelowMaxForKey(key);
+    for (var i = 0; i < storage[index].length; i++) {
+      if (storage[index][i][0] === key) {
+        let value = storage[index][i][1];
+        storage[index].splice(i, 1);
+        return value;
+      }
+    }
 
+    return null;
+  };
+
+  return result;
 };
 
 module.exports = makeHashTable;
