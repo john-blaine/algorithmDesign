@@ -1,3 +1,5 @@
+/*jshint esversion: 6 */
+
 'use strict';
 
 /* Implement the function asyncMap:
