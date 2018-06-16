@@ -27,8 +27,8 @@ var LinkedList = function() {
 
 LinkedList.prototype.addToTail = function(value) {
   let node = this.makeNode(value);
-  if (!this.head) { this.head = node};
-  node.next = this.tail;
+  if (!this.head) { this.head = node; }
+  if (this.tail) { this.tail.next = node; }
   this.tail = node;
 };
 
