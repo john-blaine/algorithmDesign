@@ -40,3 +40,5 @@ LinkedList.prototype.contains = function(
 LinkedList.prototype.makeNode = function(
 ) {
 };
+
+module.exports = LinkedList;
