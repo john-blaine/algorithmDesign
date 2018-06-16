@@ -33,7 +33,7 @@ LinkedList.prototype.addToTail = function(value) {
 };
 
 LinkedList.prototype.removeHead = function() {
-  let current = this.tail;
+  let current = this.head;
 
   if (!current) {return null};
 
@@ -43,19 +43,12 @@ LinkedList.prototype.removeHead = function() {
     return current.value;
   }
 
-  while (current.next.next) {
-    current = current.next;
-  }
-
-  let removedValue = current.next.value;
-  current.next = null;
-  this.head = current;
-  return removedValue;
+  this.head = current.next;
+  return current.value;
 };
 
 LinkedList.prototype.contains = function(value) {
-  debugger;
-  let testNum = this.tail;
+  let testNum = this.head;
   while (testNum) {
     if (testNum.value === value) return true;
     testNum = testNum.next;
