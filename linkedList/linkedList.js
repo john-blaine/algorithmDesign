@@ -21,24 +21,51 @@
 
 
 var LinkedList = function() {
-  //fill me in!
+  this.head = null;
+  this.tail = null;
 };
 
-//write methods here!
-
-LinkedList.prototype.addToTail = function(
-) {
+LinkedList.prototype.addToTail = function(value) {
+  let node = this.makeNode(value);
+  if (!this.head) { this.head = node};
+  node.next = this.tail;
+  this.tail = node;
 };
 
 LinkedList.prototype.removeHead = function() {
+  let current = this.tail;
+
+  if (!current) {return null};
+
+  if (!current.next) {
+    this.head = null;
+    this.tail = null;
+    return current.value;
+  }
+
+  while (current.next.next) {
+    current = current.next;
+  }
+
+  let removedValue = current.next.value;
+  current.next = null;
+  this.head = current;
+  return removedValue;
 };
 
-LinkedList.prototype.contains = function(
-) {
+LinkedList.prototype.contains = function(value) {
+  debugger;
+  let testNum = this.tail;
+  while (testNum) {
+    if (testNum.value === value) return true;
+    testNum = testNum.next;
+  }
+  return false;
 };
 
-LinkedList.prototype.makeNode = function(
-) {
+LinkedList.prototype.makeNode = function(value) {
+  node = {'value': value, 'next': null};
+  return node;
 };
 
 module.exports = LinkedList;
