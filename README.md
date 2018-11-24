@@ -1,10 +1,10 @@
 Algorithm design with ToyProblems
 
-My solutions for toy problem algorithms written in Javascript for the Browser.
+My solutions for toy problem algorithms written in Javascript for the Browser and Python, using pipenv for the virtual environment.
 
 Requirements
 
-This suite requires node.
+This suite requires node and python.
 
 Installation
 
